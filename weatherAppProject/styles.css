@@ -1,4 +1,4 @@
-*,*::before,*::after {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -16,7 +16,7 @@
     width:100vw;
     height:100vh;
     color: var(--colorLight2);
-    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);;
+    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);
 }
 
 h1 {
@@ -26,7 +26,7 @@ h1 {
 }
 
 .tab-container {
-    width:90%;
+    width:90%; 
     max-width: 550px;
     margin: 0 auto;
     margin-top: 4rem;
@@ -36,8 +36,8 @@ h1 {
 
 .tab{
     cursor: pointer;
-    font-size: 0.875rem;
-    letter-spacing: 1.75px;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
     padding: 5px 8px;
 }
 
@@ -55,13 +55,14 @@ h1 {
     /* appearance: none;
     border:none;
     color: white; */
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     border-radius: 5px;
     background-color: var(--colorDark2);
     cursor: pointer;
     padding: 10px 30px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    font-weight:520;
 }
 
 .sub-container{
@@ -82,17 +83,17 @@ h1 {
     margin-bottom: 2rem;
 }
 
-.grant-location-container p:first-of-type{
+.p-heading{
     font-size: 1.75rem;
     font-weight: 600; 
 }
 
-.grant-location-container p:last-of-type{
-    font-size:0.85rem;
+.p-para{
+    font-size:1rem;
     font-weight: 500;
     margin-top: 0.75rem;
     margin-bottom: 1.75rem;
-    letter-spacing: 0.75px;
+    letter-spacing: 1px;
 }
 
 .loading-container{
@@ -118,7 +119,7 @@ h1 {
 .name{
     display: flex;
     align-items: center;
-    gap: 0 0.5rem;
+    gap: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -128,7 +129,7 @@ h1 {
 }
 
 .user-info-container img{
-    width:90px;
+    width:100px;
     height:90px;
 }
 
@@ -139,11 +140,10 @@ h1 {
 .name img{
     width: 30px;
     height:30px;
-    object-fit: contain;
 }
 
 .user-info-container p[data-temp] {
-    font-size:2.75rem;
+    font-size:3rem;
     font-weight:700;
 }
 
@@ -165,7 +165,6 @@ h1 {
     display: flex;
     flex-direction: column;
     gap:5px 0;
-    /* justify-content: space-between; */
     align-items: center; 
 }   
 
@@ -174,13 +173,12 @@ h1 {
     height:50px;
 }
 
-.parameter p:first-of-type{
+.parameter .para-p{
     font-size: 1.15rem;
     font-weight:600;
     text-transform: uppercase;
 }
-
-.parameter p:last-of-type{
+.parameter .para-val{
     font-size: 1rem;
     font-weight: 200;
 }
@@ -190,8 +188,6 @@ h1 {
     width:90%;
     max-width:550px;
     margin:0 auto;
-    justify-content: center;
-    align-items: center;
     gap: 0 10px; 
     margin-bottom: 3rem;
 }
@@ -202,7 +198,7 @@ h1 {
 
 .form-container input{
     all:unset;
-    width: calc(100% - 80px);
+    width:470px;
     height:40px;
     padding: 0 20px;
     background-color:rgba(219, 226, 239, 0.5);
@@ -213,9 +209,9 @@ h1 {
     color: rgba(255, 255, 255, 0.7);
 }
 
-.form-container input:focus{
+/* .form-container input:focus{
     outline: 3px solid rgba(255, 255, 255, 0.7);
-}
+} */
 
 .form-container .btn {
     padding:unset;
@@ -225,5 +221,4 @@ h1 {
     align-items: center;
     justify-content: center;
     border-radius: 100%;
-    margin-bottom:1px;
 }

@@ -1,57 +1,54 @@
-const userTab = document.querySelector("[data-userWeather]");
-const searchTab = document.querySelector("[data-searchWeather]");
+const userTab = document.querySelector("[userWeather]");
+const searchTab = document.querySelector("[searchWeather]");
 const userContainer = document.querySelector(".weather-container");
 
 const grantAccessContainer = document.querySelector(".grant-location-container");
-const searchForm = document.querySelector("[data-searchForm]");
+const searchForm = document.querySelector("[searchForm]");
 const loadingScreen = document.querySelector(".loading-container");
 const userInfoContainer = document.querySelector(".user-info-container");
 
-//initially vairables need????
-
+//default tab placed
 let oldTab = userTab;
 const API_KEY = "d1845658f92b31c64bd94f06f7188c9c";
 oldTab.classList.add("current-tab");
 getfromSessionStorage();
 
+userTab.addEventListener("click", () => {
+    switchTab(userTab);
+});
+
+searchTab.addEventListener("click", () => {
+    switchTab(searchTab);
+});
+
 function switchTab(newTab) {
+    //yeh function chalega hi sirf ek condition ke liye
     if(newTab != oldTab) {
         oldTab.classList.remove("current-tab");
         oldTab = newTab;
         oldTab.classList.add("current-tab");
 
         if(!searchForm.classList.contains("active")) {
-            //kya search form wala container is invisible, if yes then make it visible
+            //kya search form wala container  invisible hai, if yes then make it visible
             userInfoContainer.classList.remove("active");
             grantAccessContainer.classList.remove("active");
             searchForm.classList.add("active");
         }
         else {
-            //main pehle search wale tab pr tha, ab your weather tab visible karna h 
+            //it means search wala form visible hai toh invisible krwao
             searchForm.classList.remove("active");
-            userInfoContainer.classList.remove("active");
+            userInfoContainer.classList.remove("active");//this is also removed as by default it would also be present 
             //ab main your weather tab me aagya hu, toh weather bhi display karna poadega, so let's check local storage first
             //for coordinates, if we haved saved them there.
-            getfromSessionStorage();
+            getfromSessionStorage(); //now i have to show my weather so for that coordinates checked
         }
     }
 }
-
-userTab.addEventListener("click", () => {
-    //pass clicked tab as input paramter
-    switchTab(userTab);
-});
-
-searchTab.addEventListener("click", () => {
-    //pass clicked tab as input paramter
-    switchTab(searchTab);
-});
 
 //check if cordinates are already present in session storage
 function getfromSessionStorage() {
     const localCoordinates = sessionStorage.getItem("user-coordinates");
     if(!localCoordinates) {
-        //agar local coordinates nahi mile
         grantAccessContainer.classList.add("active");
     }
     else {
@@ -62,10 +59,12 @@ function getfromSessionStorage() {
 }
 
 async function fetchUserWeatherInfo(coordinates) {
+
     const {lat, lon} = coordinates;
-    // make grantcontainer invisible
+    //grant location container is made invisible
     grantAccessContainer.classList.remove("active");
-    //make loader visible
+
+    // loader is made visible because an async network call is made
     loadingScreen.classList.add("active");
 
     //API CALL
@@ -75,14 +74,13 @@ async function fetchUserWeatherInfo(coordinates) {
           );
         const  data = await response.json();
 
-        loadingScreen.classList.remove("active");
+        loadingScreen.classList.remove("active"); //loader is removed 
         userInfoContainer.classList.add("active");
-        renderWeatherInfo(data);
+        renderWeatherInfo(data); //this is for mapping info in website with data came to show on ui
     }
     catch(err) {
         loadingScreen.classList.remove("active");
         //HW
-
     }
 
 }
@@ -110,9 +108,13 @@ function renderWeatherInfo(weatherInfo) {
     windspeed.innerText = `${weatherInfo?.wind?.speed} m/s`;
     humidity.innerText = `${weatherInfo?.main?.humidity}%`;
     cloudiness.innerText = `${weatherInfo?.clouds?.all}%`;
+    // ?. is optional chaining operator
 
 
 }
+
+const grantAccessButton = document.querySelector("[data-grantAccess]");
+grantAccessButton.addEventListener("click", getLocation);
 
 function getLocation() {
     if(navigator.geolocation) {
@@ -130,13 +132,10 @@ function showPosition(position) {
         lon: position.coords.longitude,
     }
 
-    sessionStorage.setItem("user-coordinates", JSON.stringify(userCoordinates));
+    sessionStorage.setItem("user-coordinates", JSON.stringify(userCoordinates)); //key value pair thats why converted in string 
     fetchUserWeatherInfo(userCoordinates);
 
 }
-
-const grantAccessButton = document.querySelector("[data-grantAccess]");
-grantAccessButton.addEventListener("click", getLocation);
 
 const searchInput = document.querySelector("[data-searchInput]");
 

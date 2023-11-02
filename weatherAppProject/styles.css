@@ -52,16 +52,12 @@ h1 {
 
 .btn{
     all: unset;
-    /* appearance: none;
-    border:none;
-    color: white; */
     font-size: 0.9rem;
     text-transform: uppercase;
     border-radius: 5px;
     background-color: var(--colorDark2);
     cursor: pointer;
     padding: 10px 30px;
-    /* margin-bottom: 10px; */
     font-weight:520;
 }
 
@@ -134,7 +130,7 @@ h1 {
 }
 
 .name p{
-        font-size:2rem;
+    font-size:2rem;
 }
 
 .name img{
@@ -208,10 +204,6 @@ h1 {
 .form-container input::placeholder{
     color: rgba(255, 255, 255, 0.7);
 }
-
-/* .form-container input:focus{
-    outline: 3px solid rgba(255, 255, 255, 0.7);
-} */
 
 .form-container .btn {
     padding:unset;
